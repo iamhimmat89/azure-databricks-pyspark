@@ -7,10 +7,9 @@ Before directly jumping to the solution let us check which all details are requi
 -	Storage Account Access Key <storage-account-access-key>
 	-	There would be 2 access keys, we can use either one of them.
 
-	
-![Storage Account - Access Key Page](https://raw.githubusercontent.com/iamhimmat89/azure-databricks-pyspark/master/blob-access-key.PNG)
+![Storage Account - Access Key Page](https://raw.githubusercontent.com/iamhimmat89/azure-databricks-pyspark/master/imgs/blob-access-key.PNG)
 
-![Storage Account - Storage Explorer Page](https://raw.githubusercontent.com/iamhimmat89/azure-databricks-pyspark/master/blob-container-name.PNG)
+![Storage Account - Storage Explorer Page](https://raw.githubusercontent.com/iamhimmat89/azure-databricks-pyspark/master/imgs/blob-container-name.PNG)
 
 ## **1. Mount Blob Storage to Databricks File System (DBFS)**
 
@@ -60,7 +59,7 @@ df.write.mode("overwrite").format("parquet").option("header", "true").save(stora
 ```	
 
 Output files are look like below:
-![Output Files](https://raw.githubusercontent.com/iamhimmat89/azure-databricks-pyspark/imgs/master/part-file.PNG)
+![Output Files](https://raw.githubusercontent.com/iamhimmat89/azure-databricks-pyspark/master/imgs/part-file.PNG)
 
 ```python	
 # Use below code to write file with specific file name 
