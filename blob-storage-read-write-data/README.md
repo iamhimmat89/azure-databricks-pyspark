@@ -6,10 +6,10 @@ Before directly jumping to the solution let us check which all details are requi
 -	Storage Account Name <storage-account-name>
 -	Storage Account Access Key <storage-account-access-key>
 	-	There would be 2 access keys, we can use either one of them.
-		
-<img src="https://github.com/iamhimmat89/azure-databricks-pyspark/">
-![Storage Account - Access Key Page](https://github.com/iamhimmat89/azure-databricks-pyspark/blob-access-key.PNG)
-![Storage Account - Storage Explorer Page](https://github.com/iamhimmat89/azure-databricks-pyspark/blob-container-name.PNG)
+
+	
+![Storage Account - Access Key Page](https://raw.githubusercontent.com/iamhimmat89/azure-databricks-pyspark/master/blob-access-key.PNG)
+![Storage Account - Storage Explorer Page](https://raw.githubusercontent.com/iamhimmat89/azure-databricks-pyspark/master/blob-container-name.PNG)
 
 ## **1. Mount Blob Storage to Databricks File System (DBFS)**
 
@@ -57,7 +57,7 @@ df = spark.read.csv(storage_url+"/<file-path>", inferSchema = True, header = Tru
 df.write.mode("overwrite").format("parquet").option("header", "true").save(storage_url+"/<target-path>")
 
 # Output files are look like below:
-![Output Files](https://github.com/iamhimmat89/azure-databricks-pyspark/blob/master/part-file.PNG)
+![Output Files](https://raw.githubusercontent.com/iamhimmat89/azure-databricks-pyspark/master/part-file.PNG)
 
 # Use below code to write file with specific file name 
 # coalesce(1) - Will make sure there should be only one output file as part-00000
