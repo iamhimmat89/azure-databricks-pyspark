@@ -27,7 +27,7 @@ dbutils.fs.mount(
 # Here instead of using access key directly, we should always use azure key vault. 
 # Below is the syntax for the same 
 # extra_configs = {fs.azure.account.key.<storage-account-name>.blob.core.windows.net:dbutils.secrets.get(scope = "<scope-name>", key = "<key-name>")}
-# For more details, how to set-up key vault and all. Please check this link - 
+# For more details, how to set-up key vault and all. Please check this link - https://github.com/iamhimmat89/azure-databricks-pyspark/blob/master/key-vault/README.md
 
 # Access Files
 df = spark.read.csv("/mnt/<dbfs-path>/...", inferSchema = True, header = True) # OR
@@ -44,7 +44,7 @@ dbutils.fs.unmount("/mnt/<dbfs-path>")
 
 ```python
 spark.conf.set("fs.azure.account.key.<storage-account-name>.blob.core.windows.net", "<storage-account-access-key>")
-# Recommanded to use azure key vault as below. For more details please check this link -  
+# Recommanded to use azure key vault as below. For more details please check this link -  https://github.com/iamhimmat89/azure-databricks-pyspark/blob/master/key-vault/README.md
 # spark.conf.set("fs.azure.account.key.<storage-account-name>.blob.core.windows.net", dbutils.secrets.get(scope = "<scope-name>", key = "<key-name>"))
 
 storage_url = "wasbs://<container-name>@<storage-account-name>.blob.core.windows.net"
