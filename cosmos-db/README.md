@@ -1,8 +1,8 @@
 # Azure Cosmos DB
 
--	Download databricks cluster compatible azure-cosmosdb-spark library
+-	Download azure-cosmosdb-spark library compatible to databricks cluster
 	-	Go to - https://search.maven.org/
-	-	Search for 'cosmosdb-spark' 
+	-	Search for 'azure-cosmosdb-spark' 
 	-	Click on latest version and download jar
 
 -	Install jar file 
@@ -13,7 +13,7 @@
 	
 	![Cosmos DB](https://raw.githubusercontent.com/iamhimmat89/azure-databricks-pyspark/master/zimgs/cosmosdb.PNG)
 	
-	-	Note: There are multiple ways to install azure-cosmosdb-spark jar on cluster. We can use any of the method to install jar.
+	-	Note: There are multiple ways to install azure-cosmosdb-spark jar on cluster. you can use any of the method to install jar.
 	
 -	Reading from Cosmos DB 
 
@@ -55,12 +55,14 @@ df.write.format("com.microsoft.azure.cosmosdb.spark").mode("append").options(con
 -	Common Errors
 
 	-	Error: java.lang.ClassNotFoundException: Failed to find data source: com.microsoft.azure.cosmosdb.spark. Please find package at http://spark.apache.org/third-party-projects.html
-	-	Solution: This error is due to azure-cosmosdb-spark package is not installed. Please check first 2 steps for the same.
-	
+	```python
+	Solution: 
+		This error is due to azure-cosmosdb-spark package is not installed. Please check first 2 steps for the same.
+	```
 	
 	-	Error: java.lang.UnsupportedOperationException: Writing in a non-empty collection.
-	-	Solution: 
 	```python
+	Solution: 
 		# This is due to sepcified collection is non-empty. Either use another collection or add mode("append")
 		df.write.format("com.microsoft.azure.cosmosdb.spark").mode("append").options(config).save()
 	```
