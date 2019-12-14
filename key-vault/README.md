@@ -13,17 +13,17 @@ Key vault is a tool to storing and accessing secrets. Secrets may contain access
 ![Output Files](https://raw.githubusercontent.com/iamhimmat89/azure-databricks-pyspark/master/key-vault-1.PNG)
 
 -	Create secret scope in azure databricks
-	-	use https://<databricks-url>#secrets/createScope
+	-	use <databricks-url>#secrets/createScope
 	
 ![Output Files](https://raw.githubusercontent.com/iamhimmat89/azure-databricks-pyspark/master/secret-scope.PNG)
 
 	-	get DNS Name and Resource ID from azure key vault properties 
 	
-![Output Files](https://raw.githubusercontent.com/iamhimmat89/azure-databricks-pyspark/master/part-file.PNG)
+![Output Files](https://raw.githubusercontent.com/iamhimmat89/azure-databricks-pyspark/master/key-vault-2.PNG)
 
 -	Access secret values
 
-```pyspark
+```python
 dbutils.secrets.get(scope = "<scope-name>", key = "<key-name>")
 ```
 	
