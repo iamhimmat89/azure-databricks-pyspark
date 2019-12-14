@@ -18,7 +18,7 @@ Before directly jumping to the solution let us check which all details are requi
 
 - 	Note - There are three types of blob storage supports by azure; block, append, and page. we can only mount block blobs to DBFS.
 
-```
+```python
 # Mount
 dbutils.fs.mount(
 	source = "wasbs://<container-name>@<storage-account-name>.blob.core.windows.net",
@@ -43,7 +43,7 @@ dbutils.fs.unmount("/mnt/<dbfs-path>")
 
 1.	**Using DataFrame API**
 
-```
+```python
 spark.conf.set("fs.azure.account.key.<storage-account-name>.blob.core.windows.net", "<storage-account-access-key>")
 # Recommanded to use azure key vault as below. For more details please check this link -  
 # spark.conf.set("fs.azure.account.key.<storage-account-name>.blob.core.windows.net", dbutils.secrets.get(scope = "<scope-name>", key = "<key-name>"))
@@ -59,10 +59,10 @@ df.write.mode("overwrite").format("parquet").option("header", "true").save(stora
 
 ```	
 
-# Output files are look like below:
-![Output Files](https://raw.githubusercontent.com/iamhimmat89/azure-databricks-pyspark/master/part-file.PNG)
+	Output files are look like below:
+	![Output Files](https://raw.githubusercontent.com/iamhimmat89/azure-databricks-pyspark/master/part-file.PNG)
 
-```	
+```python	
 # Use below code to write file with specific file name 
 # coalesce(1) - Will make sure there should be only one output file as part-00000
 df.coalesce(1).write.mode("overwrite").format("parquet").option("header", "true").save(storage_url+"/<tmp-path>")
@@ -86,7 +86,7 @@ dbutils.fs.rm(tmpReadPath, recurse = True)
 - 	Setting configuration with spark.conf.set() is only visible to DataFrame and DataSet API. 
 - 	RDD API has different syntax to set confiuration as below:
 
-```	
+```	python
 spark.hadoop.fs.azure.account.key.<storage-account-name>.blob.core.windows.net <storage-account-access-key>
 # As mention above use key vault for storing keys 
 ```	
