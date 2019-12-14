@@ -60,7 +60,7 @@ df.write.mode("overwrite").format("parquet").option("header", "true").save(stora
 ```	
 
 Output files are look like below:
-![Output Files](https://raw.githubusercontent.com/iamhimmat89/azure-databricks-pyspark/master/part-file.PNG)
+![Output Files](https://raw.githubusercontent.com/iamhimmat89/azure-databricks-pyspark/imgs/master/part-file.PNG)
 
 ```python	
 # Use below code to write file with specific file name 
