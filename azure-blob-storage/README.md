@@ -13,29 +13,8 @@ Before directly jumping to the solution let us check which all details are requi
 
 ## **1. Mount Blob Storage to Databricks File System (DBFS)**
 
-- 	We can mount a folder inside container or entire container. In this approach data is never copied/synched locally, it is just a pointer to blob storage container.
-
-- 	Note - There are three types of blob storage supports by azure; block, append, and page. we can only mount block blobs to DBFS.
-
-```python
-# Mount
-dbutils.fs.mount(
-	source = "wasbs://<container-name>@<storage-account-name>.blob.core.windows.net",
-	mount_point = "/mnt/<dbfs-path>", # dbfs-path where blob will be mounted in DBFS 
-	extra_configs = {fs.azure.account.key.<storage-account-name>.blob.core.windows.net:<storage-account-access-key>}
-)
-# Here instead of using access key directly, we should always use azure key vault. 
-# Below is the syntax for the same 
-# extra_configs = {fs.azure.account.key.<storage-account-name>.blob.core.windows.net:dbutils.secrets.get(scope = "<scope-name>", key = "<key-name>")}
-# For more details, how to set-up key vault and all. Please check this link - https://github.com/iamhimmat89/azure-databricks-pyspark/blob/master/key-vault/README.md
-
-# Access Files
-df = spark.read.csv("/mnt/<dbfs-path>/...", inferSchema = True, header = True) # OR
-df = spark.read.csv("dbfs:/<dbfs-path>/...", inferSchema = True, header = True)
-
-# Unmount 
-dbutils.fs.unmount("/mnt/<dbfs-path>")
-```
+-	Please refer below link for How to mount path in databricks and access required data.
+	https://github.com/iamhimmat89/azure-databricks-pyspark/blob/master/databricks-mount-path/README.md
 	
 	
 ## **2.	Access Directly**
@@ -44,7 +23,7 @@ dbutils.fs.unmount("/mnt/<dbfs-path>")
 
 ```python
 spark.conf.set("fs.azure.account.key.<storage-account-name>.blob.core.windows.net", "<storage-account-access-key>")
-# Recommanded to use azure key vault as below. For more details please check this link -  https://github.com/iamhimmat89/azure-databricks-pyspark/blob/master/key-vault/README.md
+# Recommanded to use azure key vault as below. For more details please check this link -  https://github.com/iamhimmat89/azure-databricks-pyspark/blob/master/azure-key-vault/README.md
 # spark.conf.set("fs.azure.account.key.<storage-account-name>.blob.core.windows.net", dbutils.secrets.get(scope = "<scope-name>", key = "<key-name>"))
 
 storage_url = "wasbs://<container-name>@<storage-account-name>.blob.core.windows.net"
@@ -91,4 +70,3 @@ spark.hadoop.fs.azure.account.key.<storage-account-name>.blob.core.windows.net <
 ```	
 
 - 	For read and write blob file you can refer above section(Using DataFrame API).
-

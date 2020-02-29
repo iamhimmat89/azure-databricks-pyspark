@@ -2,18 +2,20 @@
 
 -	We can access SQL Data Warehouse (SQL DW) from databricks using a JDBC connector.
 -	The databricks cluster and SQL DW instance access common storage container (blob) to transfer data between two system.
--	Please refer below link to set up and access blob storage data:  
-	https://github.com/iamhimmat89/azure-databricks-pyspark/tree/master/blob-storage
+-	Please refer below link to set up and access azure blob storage data:
+	https://github.com/iamhimmat89/azure-databricks-pyspark/tree/master/azure-blob-storage
+-	Please refer below link to set up and access azure data lake storage Gen2 data:
+	https://github.com/iamhimmat89/azure-databricks-pyspark/tree/master/azure-data-lake-storage-gen2
 
 ![SQL Config](https://raw.githubusercontent.com/iamhimmat89/azure-databricks-pyspark/master/zimgs/sql-conf.PNG)
 
 ## **1.	Batch**
-	
+
 ```python
-# Blob storage account set up
+# Azure blob storage account set up
 spark.conf.set("fs.azure.account.key.<storage-account-name>.blob.core.windows.net", "<storage-account-access-key>")
 
-# Read data from a SQL DW table.
+# Read data from a SQL DW table to azure blob storage
 df = spark.read \
   .format("com.databricks.spark.sqldw") \
   .option("url", "jdbc:sqlserver://<connection-string>") \
@@ -22,7 +24,7 @@ df = spark.read \
   .option("dbTable", "<table-name>") \
   .load()
   
-# Read data using a SQL DW query.
+# Read data using a SQL DW query to azure blob storage
 df = spark.read \
   .format("com.databricks.spark.sqldw") \
   .option("url", "jdbc:sqlserver://<connection-string>") \
@@ -33,7 +35,7 @@ df = spark.read \
 
 # code <data transformations>
   
-# Write data to SQL DW table.
+# Write data to SQL DW table from azure blob storage
 df.write \
   .format("com.databricks.spark.sqldw") \
   .option("url", "jdbc:sqlserver://<connection-string>") \
@@ -43,10 +45,11 @@ df.write \
   .save()
 ```
 
+
 ## **2.	Streaming**
 
 ```python
-# Blob storage account set up
+# Azure blob storage account set up
 spark.conf.set(
   "fs.azure.account.key.<storage-account-name>.blob.core.windows.net",
   "<your-storage-account-access-key>")
@@ -70,4 +73,3 @@ df.writeStream \
   .option("checkpointLocation", "/<checkpoint_loc>") \
   .start()
 ```
-
